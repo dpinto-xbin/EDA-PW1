@@ -37,6 +37,9 @@
     <Text Include="Clients.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Transports.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="clients.bin">
