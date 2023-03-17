@@ -1,0 +1,4 @@
+1;1;Electric Scooter - 10A/H
+2;2;Electric Scooter - 12.5A/H
+3;3;Electric Scooter - 15A/H
+4;4;Electric Scooter - 20A/H

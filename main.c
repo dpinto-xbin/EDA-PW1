@@ -14,9 +14,14 @@ int menu()
 	printf("3 - Save Clients (.bin)\n");
 	printf("4 - Remove Client by ID\n");
 	printf("5 - Update Client by ID\n");
-	printf("6 - List Transports\n");
+	printf("6 - Insert Transport\n");
+	printf("7 - List Transports\n");
+	printf("8 - Update Transport by ID\n");
+	printf("9 - Remove Transport by ID\n");
+	printf("10 - Save Transports (.bin)\n");
+	printf("11 - List Categories\n");
+	printf("12 - Clear console\n");
 	printf("0 - Exit\n");
-	printf("9 - Clear console\n");
 	printf("OPTION:\n");
 	scanf("%d", &op);
 	getchar();
@@ -27,8 +32,10 @@ int main()
 {
 	Client* clients = NULL; // Empty linked list
 	Transport* transports = NULL;
+	Category* categories = NULL;
 	clients = readClients(); // Start by reading file
 	transports = readTransports();
+	categories = readCategories();
 	int op;
 
 	do
@@ -41,9 +48,13 @@ int main()
 		case 3: saveClients(clients); break;
 		case 4: clients = removeClient(clients); break;
 		case 5: updateClient(clients); break;
-		case 6: listTransports(transports); break;
-		case 7: updateTransport(transports); break;
-		case 9: system("cls"); break;
+		case 6: transports = insertTransport(transports); break;
+		case 7: listTransports(transports); break;
+		case 8: updateTransport(transports); break;
+		case 9: transports = removeTransport(transports); break;
+		case 10: saveTransports(transports); break;
+		case 11: listCategories(categories); break;
+		case 12: system("cls"); break;
 		}
 	} while (op != 0);
 

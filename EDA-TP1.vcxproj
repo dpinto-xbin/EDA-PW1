@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Clients.txt" />
+    <Text Include="Categories.txt" />
     <Text Include="Transports.txt" />
   </ItemGroup>
   <ItemGroup>
