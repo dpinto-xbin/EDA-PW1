@@ -1,3 +1,9 @@
+/*****************************************************************//**
+ * \file   main.c
+ * 
+ * \author Diogo Pinto & Ricardo Cruz
+ * \date   March 2023
+ *********************************************************************/
 #include <stdlib.h>
 #include <stdio.h>
 #include "Clients.h"
