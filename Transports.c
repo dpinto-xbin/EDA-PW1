@@ -161,17 +161,24 @@ void updateTransport(Transport* original) {
 
 #pragma region UpdateTransportsOptions
 
-int updateTransportRented(int clientID,int transportID, Transport* original){
+int updateTransportRented(int clientID,int transportID, Transport* original, int opt){
 
 	Transport* current = original;
 
 	while (current != NULL) {
 		if (current->idTransport == transportID) { 
 			if (current->status != 4) {
-				system("cls");
-				printf("The transport you chose is not available! \n");
-				printf("Going back to menu... \n");
-				return 0;  // return without updating
+				if (opt == 2)
+				{
+					current->rentedCli = 0;
+					current->status = AVAILABLE;
+				}else{
+					system("cls");
+					printf("The transport you chose is not available! \n");
+					printf("Going back to menu... \n");
+					return 0;  // return without updating
+				}
+				
 			}
 			else {
 				current->rentedCli = clientID;
@@ -409,6 +416,16 @@ char* typeCategories(Category* aux, int type)
 	while (aux != NULL)
 	{
 		if (aux->type == type) return aux->desc;
+		aux = aux->next;
+	}
+}
+
+// Get type via transportID
+int getType(Transport* aux, int transportID)
+{
+	while (aux != NULL)
+	{
+		if (aux->idTransport == transportID) return aux->type;
 		aux = aux->next;
 	}
 }

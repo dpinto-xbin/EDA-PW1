@@ -22,7 +22,8 @@ int menu()
 	printf("10 - Save Transports (.bin)\n");
 	printf("11 - List Categories\n");
 	printf("12 - Rent Transport\n");
-	printf("13 - Clear console\n");
+	printf("13 - Return Transport\n");
+	printf("14 - Clear console\n");
 	printf("0 - Exit\n");
 	printf("OPTION:\n");
 	scanf("%d", &op);
@@ -57,7 +58,8 @@ int main()
 		case 10: saveTransports(transports); break;
 		case 11: listCategories(categories); break;
 		case 12: rentTransport(transports, clients, categories, clientID); break; //Dont forget this step is required to have client logged in!
-		case 13: system("cls"); break;
+		case 13: returnTransport(transports, clients, categories, clientID); break; //Dont forget this step is required to have client logged in!
+		case 14: system("cls"); break;
 		}
 	} while (op != 0);
 

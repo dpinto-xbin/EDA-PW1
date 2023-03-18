@@ -1,6 +1,8 @@
 #include <stdio.h>
 #define RENTED 3
+#define AVAILABLE 4
 
+#pragma region Structs
 typedef struct newTransport {
     int idTransport;
     int type;
@@ -21,6 +23,7 @@ typedef struct newCategory {
 
     struct newCategory* next;
 } Category;
+#pragma endregion
 
 #pragma region Transports
 
@@ -54,10 +57,13 @@ Transport* readTransports();
 Transport* insertTransports(Transport* aux, int idTransport, int status, int type, int rentedCli, float battery, float autonomy, float price, char geolocation[]);
 
 // Updates Transport to RENTED after client renting it.
-int updateTransportRented(int clientID, int transportID, Transport* original);
+int updateTransportRented(int clientID, int transportID, Transport* original, int opt);
 
 // Gets all transport info when renting
 void getTransportInfo(Transport* aux, Category* aux2, int transportID);
+
+// Check for type via TRANSPORTID
+int getType(Transport* aux, int transportID);
 #pragma endregion
 
 

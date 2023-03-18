@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Clients.h"
+#include "Transports.h"
 
 #pragma warning(disable:4996)
 
@@ -236,6 +237,32 @@ int existClient(Client* aux, int idClient)
 	return(0);
 }
 
+// Checks if client has a rental at that time
+// returns the transportID if yes, or 0 if theres no rental
+int checkClientRental(Client* original, Transport* transport, Category* category, int clientID) {
+	int aux;
+	while (original != NULL)
+	{
+		if (original->idClient == clientID) {
+			if (original->rentedT == 0)
+			{
+				printf("You don't have any vehicle rented at the moment!\n");
+				printf("Going back to the menu...\n");
+				return 0;
+			}
+			else {
+				aux = getType(transport, original->rentedT);
+				printf("------------------------------------------------------------------------------------------------\n");
+				printf("You are currently renting %s!\n", typeCategories(category, aux));
+				printf("------------------------------------------------------------------------------------------------\n\n\n");
+				return original->rentedT;
+			}
+		}
+		original = original->next;
+	}
+	return(0);
+}
+
 #pragma endregion
 
 #pragma region SaveClientsFiles
@@ -272,17 +299,22 @@ void saveClients(Client* aux)
 #pragma endregion
 
 #pragma region UpdateClientsOptions
-int updateClientRented(int clientID, int transportID, Client* original) {
+int updateClientRented(int clientID, int transportID, Client* original, int opt) {
 
 	Client* current = original;
 
 	while (current != NULL) {
 		if (current->idClient == clientID) {
 			if (current->rentedT != 0) {
-				system("cls");
-				printf("You're already renting! \n");
-				printf("Going back to menu... \n");
-				return 0;  // return without updating
+				if (opt == 2) {
+					current->rentedT = 0;
+				}
+				else {
+					system("cls");
+					printf("You're already renting! \n");
+					printf("Going back to menu... \n");
+					return 0;  // return without updating
+				}
 			}
 			else {
 				current->rentedT = transportID;
