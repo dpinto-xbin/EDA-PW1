@@ -129,10 +129,12 @@
   <ItemGroup>
     <ClCompile Include="Clients.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Renting.c" />
     <ClCompile Include="Transports.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clients.h" />
+    <ClInclude Include="Renting.h" />
     <ClInclude Include="Transports.h" />
   </ItemGroup>
   <ItemGroup>

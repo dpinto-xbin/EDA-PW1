@@ -38,3 +38,6 @@ Client* removeClient(Client* original);
 //Updates client via idClient via pointer
 void updateClient(Client* original);
 
+//Updates the rented transport on client
+int updateClientRented(int clientID, int transportID, Client* client);
+

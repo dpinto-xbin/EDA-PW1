@@ -5,6 +5,8 @@
 #pragma warning(disable:4996)
 
 #pragma region Transports
+
+#pragma region ReadAndInsertTransportsFromFile
 // Reads from file all transports
 Transport* readTransports()
 {
@@ -47,19 +49,42 @@ Transport* insertTransports(Transport* aux, int idTransport, int status, int typ
 	}
 	else return(aux);
 }
+#pragma endregion
 
+#pragma region ListTransportsOptions
 // Lists all the transports
 void listTransports(Transport* aux)
 {
+	system("cls");
 	printf("---------------------------------------------------------------\n");
+	printf("ALL TRANSPORTS\n\n");
 	while (aux != NULL)
 	{
-		printf("ID: %d \n STATUS: %d \n TYPE: %d\n RENTED CLIENT ID: %d \n BATTERY: %.2f \n AUTONOMY: %.2f \n PRICE: %.2f \n GEOLOCATION: %s \n\n\n", aux->idTransport, aux->status, aux->type, aux->rentedCli, aux->battery, aux->autonomy, aux->price, aux->geolocation);
+		printf("ID: %d - STATUS: %d - TYPE: %d - RENTED CLIENT ID: %d - BATTERY: %.2f - AUTONOMY: %.2f - PRICE: %.2f - GEOLOCATION: %s \n\n\n", aux->idTransport, aux->status, aux->type, aux->rentedCli, aux->battery, aux->autonomy, aux->price, aux->geolocation);
 		aux = aux->next;
 	}
 	printf("---------------------------------------------------------------\n");
 }
 
+// List all the available transports
+
+void availableTransports(Transport* aux, Category* aux2)
+{
+	system("cls");
+	printf("---------------------------------------------------------------\n");
+	printf("AVAILABLE TRANSPORTS\n\n");
+	while (aux != NULL)
+	{
+		if (aux->status == 4) {
+			printf("ID: %d - TYPE: %s - BATTERY: %.2f - AUTONOMY: %.2f - PRICE: %.2f - GEOLOCATION: %s \n\n\n", aux->idTransport, typeCategories(aux2, aux->type), aux->battery, aux->autonomy, aux->price, aux->geolocation);
+		}
+		aux = aux->next;
+	}
+	printf("---------------------------------------------------------------\n");
+}
+#pragma endregion
+
+#pragma region UpdateUniqueTransport
 // Updates transport via transportID
 
 void updateTransport(Transport* original) {
@@ -88,7 +113,7 @@ void updateTransport(Transport* original) {
 			if (type == 1) {
 				// Update transport status
 				printf("Current status: %d\n", current->status);
-				printf("|1 - Maintenance | 2 - MIA (Missing in Action) |\n"); //Rented and Available not needed here.
+				printf("| 1 - Maintenance | 2 - MIA (Missing in Action) | 3 - Rented | 4 - Available |\n");
 				printf("Insert the status to update:\n");
 				scanf("%d", &status);
 				current->status = status;
@@ -132,7 +157,36 @@ void updateTransport(Transport* original) {
 	printf("Transport %d not found.\n", transportID);
 	printf("---------------------------------------------------------------\n");
 }
+#pragma endregion
 
+#pragma region UpdateTransportsOptions
+
+int updateTransportRented(int clientID,int transportID, Transport* original){
+
+	Transport* current = original;
+
+	while (current != NULL) {
+		if (current->idTransport == transportID) { 
+			if (current->status != 4) {
+				system("cls");
+				printf("The transport you chose is not available! \n");
+				printf("Going back to menu... \n");
+				return 0;  // return without updating
+			}
+			else {
+				current->rentedCli = clientID;
+				current->status = RENTED;
+				return 1;  // return the current list after updating
+			}
+		}
+		current = current->next;
+	}
+
+}
+
+#pragma endregion
+
+#pragma region InsertAndRemoveUniqueTransport
 // Insert unique transport
 Transport* insertTransport(Transport* aux)
 {
@@ -229,6 +283,9 @@ Transport* removeTransport(Transport* original)
 		}
 	}
 }
+#pragma endregion
+
+#pragma region SaveTransportsFiles
 //Save transports in .bin file
 void saveTransports(Transport* aux)
 {
@@ -266,7 +323,35 @@ void saveTransports(Transport* aux)
 }
 #pragma endregion
 
+#pragma region TransportGetFunctions
+void getTransportInfo(Transport* aux, Category* aux2, int transportID)
+{
+	while (aux != NULL)
+	{
+		if (aux->idTransport == transportID) {
+			printf("------------------------------------------------------------------------------------------------\n");
+			printf("You chose %s!\n", typeCategories(aux2, aux->type));
+			printf("So your vehicle ID is %d and is located in: %s\n",
+				aux->idTransport, aux->geolocation);
+			printf("The battery level is %.2f and you have at least %.2f kms of autonomy.\n", 
+				aux->battery, aux->autonomy);
+			printf("Dont forget the price is %.2f EUR!\n", 
+				aux->price);
+			printf("Thank you for renting our vehicles! \n");
+			printf("------------------------------------------------------------------------------------------------\n\n\n");
+			break;
+		}
+		aux = aux->next;
+	}
+}
+#pragma endregion
+
+
+#pragma endregion
+
 #pragma region Categories
+
+#pragma region ReadAndInsertCategoriesFromFile
 // Reads from file all transports
 Category* readCategories()
 {
@@ -303,17 +388,32 @@ Category* insertCategories(Category* aux, int idCategory, int type, char desc[])
 	}
 	else return(aux);
 }
+#pragma endregion
 
+#pragma region ListCategoriesOptions
 // Lists all the categories
 void listCategories(Category* aux)
 {
 	printf("---------------------------------------------------------------\n");
 	while (aux != NULL)
 	{
-		printf("ID: %d\n TYPE: %d \n DESCRIPTION: %s \n\n\n", aux->idCategory, aux->type, aux->desc);
+		printf("ID: %d - TYPE: %d - DESCRIPTION: %s \n\n\n", aux->idCategory, aux->type, aux->desc);
 		aux = aux->next;
 	}
 	printf("---------------------------------------------------------------\n");
 }
+
+// Get category type description
+char* typeCategories(Category* aux, int type)
+{
+	while (aux != NULL)
+	{
+		if (aux->type == type) return aux->desc;
+		aux = aux->next;
+	}
+}
+
+#pragma endregion
+
 #pragma endregion
 

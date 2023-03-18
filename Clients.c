@@ -4,6 +4,7 @@
 
 #pragma warning(disable:4996)
 
+#pragma region ReadAndInsertClientsFromFile
 // Reads from file all clients
 Client* readClients()
 {
@@ -50,7 +51,9 @@ Client* insertClients(Client* aux, int idClient, char name[], float balance, cha
 	}
 	else return(aux);
 }
+#pragma endregion
 
+#pragma region InsertAndRemoveUniqueClient
 Client* insertClient(Client* aux)
 {
 	int idClient, rentedT;
@@ -72,95 +75,38 @@ Client* insertClient(Client* aux)
 	printf("Email: ");
 	fgets(email, 50, stdin);
 	email[strcspn(email, "\n")] = 0; // remove trailing newline
-	
-		Client* new = malloc(sizeof(struct newClient));
-		if (new != NULL)
-		{
-			new->idClient = aux->idClient + 1;
-			strcpy(new->name, name);
-			strcpy(new->nif, nif);
-			strcpy(new->address, address);
-			strcpy(new->phone, phone);
-			strcpy(new->email, email);
-			new->balance = 0;
-			new->rentedT = 0;
-			new->next = aux;
-			system("cls");
-			printf("|------Client added!------|\n");
-			return(new);
-		}
-		//PREVENT ERRORS, IF FILE IS NOT LOADED AND LIST IS NULL 
-		else {
-			new->idClient = 1;
-			strcpy(new->name, name);
-			strcpy(new->nif, nif);
-			strcpy(new->address, address);
-			strcpy(new->phone, phone);
-			strcpy(new->email, email);
-			new->balance = 0;
-			new->rentedT = 0;
-			new->next = aux;
-			system("cls");
-			printf("|------Client added!------|\n");
-			return(new);
-		}
-}
 
-
-// Checks if client is already on the list
-// Returns 1 if exists, 0 if doesnt exist
-int existClient(Client* aux, int idClient)
-{
-	while (aux != NULL)
+	Client* new = malloc(sizeof(struct newClient));
+	if (new != NULL)
 	{
-		if (aux->idClient == idClient) return(1);
-		aux = aux->next;
+		new->idClient = aux->idClient + 1;
+		strcpy(new->name, name);
+		strcpy(new->nif, nif);
+		strcpy(new->address, address);
+		strcpy(new->phone, phone);
+		strcpy(new->email, email);
+		new->balance = 0;
+		new->rentedT = 0;
+		new->next = aux;
+		system("cls");
+		printf("|------Client added!------|\n");
+		return(new);
 	}
-	return(0);
-}
-
-
-// Lists all the clients
-void listClients(Client* aux)
-{
-	printf("---------------------------------------------------------------\n");
-	while (aux != NULL)
-	{
-		printf("NAME: %s \n ID: %d\n BALANCE: %.2f \n NIF: %s \n ADDRESS: %s \n PHONE: %s \n EMAIL: %s \n RENTED ID: %d \n\n\n", aux->name, aux->idClient, aux->balance, aux->nif, aux->address, aux->phone, aux->email, aux->rentedT);
-		aux = aux->next;
+	//PREVENT ERRORS, IF FILE IS NOT LOADED AND LIST IS NULL 
+	else {
+		new->idClient = 1;
+		strcpy(new->name, name);
+		strcpy(new->nif, nif);
+		strcpy(new->address, address);
+		strcpy(new->phone, phone);
+		strcpy(new->email, email);
+		new->balance = 0;
+		new->rentedT = 0;
+		new->next = aux;
+		system("cls");
+		printf("|------Client added!------|\n");
+		return(new);
 	}
-	printf("---------------------------------------------------------------\n");
-}
-
-void saveClients(Client* aux)
-{
-	char semicolon = ';';
-	FILE* fp = fopen("clients.bin", "wb+");
-	if (fp == NULL) {
-		printf("File doesn't exist. Creating..\n");
-	}
-
-	while (aux != NULL) {
-		fwrite(&aux->idClient, sizeof(int), 1, fp);
-		fwrite(&semicolon, sizeof(char), 1, fp);
-		fwrite(aux->name, sizeof(char), sizeof(aux->name), fp);
-		fwrite(&semicolon, sizeof(char), 1, fp);
-		fwrite(&aux->balance, sizeof(float), 1, fp);
-		fwrite(&semicolon, sizeof(char), 1, fp);
-		fwrite(aux->nif, sizeof(char), sizeof(aux->nif), fp);
-		fwrite(&semicolon, sizeof(char), 1, fp);
-		fwrite(aux->address, sizeof(char), sizeof(aux->address), fp);
-		fwrite(&semicolon, sizeof(char), 1, fp);
-		fwrite(aux->phone, sizeof(char), sizeof(aux->phone), fp);
-		fwrite(&semicolon, sizeof(char), 1, fp);
-		fwrite(aux->email, sizeof(char), sizeof(aux->email), fp);
-		fwrite(&semicolon, sizeof(char), 1, fp);
-		fwrite(&aux->rentedT, sizeof(int), 1, fp);
-
-		aux = aux->next;
-	}
-
-	fclose(fp);
 }
 
 // Remove client using idClient
@@ -201,14 +147,15 @@ Client* removeClient(Client* original)
 		}
 	}
 }
+#pragma endregion
 
-
+#pragma region UpdateUniqueClient
 void updateClient(Client* original) {
 	printf("---------------------------------------------------------------\n");
 	char address[50];
 	char phone[12];
 	char email[50];
-	int clientID,type;
+	int clientID, type;
 	char buffer[5];
 
 	printf("Insert CLIENTID to update:\n");
@@ -225,7 +172,7 @@ void updateClient(Client* original) {
 		if (current->idClient == clientID) {  // assume each client has a unique ID
 			// Update the client object based on the given type
 			printf("Client Found!\n");
-			printf("Name: %s | ClientID: %d \n",current->name, current->idClient);
+			printf("Name: %s | ClientID: %d \n", current->name, current->idClient);
 
 			if (type == 1) {
 				// Update client's email
@@ -249,7 +196,7 @@ void updateClient(Client* original) {
 				printf("Insert the address to update:\n");
 				fgets(address, 50, stdin);
 				address[strcspn(address, "\n")] = 0; // remove trailing newline
-				strcpy(current->address,address);
+				strcpy(current->address, address);
 			}
 			system("cls");
 			printf("Client %s updated.\n", current->name);
@@ -260,4 +207,100 @@ void updateClient(Client* original) {
 	printf("Client %d not found.\n", clientID);
 	printf("---------------------------------------------------------------\n");
 }
+#pragma endregion
+
+#pragma region ListClientsOptions
+// Lists all the clients
+void listClients(Client* aux)
+{
+	printf("---------------------------------------------------------------\n");
+	while (aux != NULL)
+	{
+		printf("NAME: %s \n ID: %d\n BALANCE: %.2f \n NIF: %s \n ADDRESS: %s \n PHONE: %s \n EMAIL: %s \n RENTED ID: %d \n\n\n", aux->name, aux->idClient, aux->balance, aux->nif, aux->address, aux->phone, aux->email, aux->rentedT);
+		aux = aux->next;
+	}
+	printf("---------------------------------------------------------------\n");
+}
+#pragma endregion
+
+#pragma region ClientCheckFunctions
+// Checks if client is already on the list
+// Returns 1 if exists, 0 if doesnt exist
+int existClient(Client* aux, int idClient)
+{
+	while (aux != NULL)
+	{
+		if (aux->idClient == idClient) return(1);
+		aux = aux->next;
+	}
+	return(0);
+}
+
+#pragma endregion
+
+#pragma region SaveClientsFiles
+void saveClients(Client* aux)
+{
+	char semicolon = ';';
+	FILE* fp = fopen("clients.bin", "wb+");
+	if (fp == NULL) {
+		printf("File doesn't exist. Creating..\n");
+	}
+
+	while (aux != NULL) {
+		fwrite(&aux->idClient, sizeof(int), 1, fp);
+		fwrite(&semicolon, sizeof(char), 1, fp);
+		fwrite(aux->name, sizeof(char), sizeof(aux->name), fp);
+		fwrite(&semicolon, sizeof(char), 1, fp);
+		fwrite(&aux->balance, sizeof(float), 1, fp);
+		fwrite(&semicolon, sizeof(char), 1, fp);
+		fwrite(aux->nif, sizeof(char), sizeof(aux->nif), fp);
+		fwrite(&semicolon, sizeof(char), 1, fp);
+		fwrite(aux->address, sizeof(char), sizeof(aux->address), fp);
+		fwrite(&semicolon, sizeof(char), 1, fp);
+		fwrite(aux->phone, sizeof(char), sizeof(aux->phone), fp);
+		fwrite(&semicolon, sizeof(char), 1, fp);
+		fwrite(aux->email, sizeof(char), sizeof(aux->email), fp);
+		fwrite(&semicolon, sizeof(char), 1, fp);
+		fwrite(&aux->rentedT, sizeof(int), 1, fp);
+
+		aux = aux->next;
+	}
+
+	fclose(fp);
+}
+#pragma endregion
+
+#pragma region UpdateClientsOptions
+int updateClientRented(int clientID, int transportID, Client* original) {
+
+	Client* current = original;
+
+	while (current != NULL) {
+		if (current->idClient == clientID) {
+			if (current->rentedT != 0) {
+				system("cls");
+				printf("You're already renting! \n");
+				printf("Going back to menu... \n");
+				return 0;  // return without updating
+			}
+			else {
+				current->rentedT = transportID;
+				return 1;  // return the current list after updating
+			}
+		}
+		current = current->next;
+	}
+}
+#pragma endregion
+
+
+
+
+
+
+
+
+
+
 

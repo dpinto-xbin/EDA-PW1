@@ -24,12 +24,18 @@
     <ClCompile Include="Transports.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Renting.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clients.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Transports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Renting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +47,7 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="Categories.txt">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
