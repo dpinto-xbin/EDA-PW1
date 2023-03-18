@@ -4,10 +4,19 @@
 
 #pragma warning(disable:4996)
 
+
+
 #pragma region Transports
 
 #pragma region ReadAndInsertTransportsFromFile
-// Reads from file all transports
+/**
+ * \Function Name readTransports
+ * \Function Type Transport *
+ * 
+ * \Brief: Reads from file all transports
+ * 
+ * 
+ */
 Transport* readTransports()
 {
 	FILE* fp;
@@ -30,7 +39,25 @@ Transport* readTransports()
 	return(aux);
 }
 
-// Insert from file
+
+/**
+ * \Function Name insertTransports
+ * \Function Type Transport *
+ * 
+ * \Brief: Insert from file
+ * 
+ * \param aux
+ * \param idTransport
+ * \param status
+ * \param type
+ * \param rentedCli
+ * \param battery
+ * \param autonomy
+ * \param price
+ * \param geolocation
+ * 
+ * \return 
+ */
 Transport* insertTransports(Transport* aux, int idTransport, int status, int type, int rentedCli, float battery, float autonomy, float price, char geolocation[])
 {
 	Transport* new = malloc(sizeof(struct newTransport));
@@ -51,8 +78,18 @@ Transport* insertTransports(Transport* aux, int idTransport, int status, int typ
 }
 #pragma endregion
 
+
 #pragma region ListTransportsOptions
-// Lists all the transports
+
+/**
+ * \Function Name listTransports
+ * \Function Type void
+ * 
+ * \Brief: Lists all the transports
+ * 
+ * \param aux
+ * 
+ */
 void listTransports(Transport* aux)
 {
 	system("cls");
@@ -66,8 +103,17 @@ void listTransports(Transport* aux)
 	printf("---------------------------------------------------------------\n");
 }
 
-// List all the available transports
 
+/**
+ * \Function Name availableTransports
+ * \Function Type void
+ * 
+ * \Brief: List all the available transports
+ * 
+ * \param aux
+ * \param aux2
+ * 
+ */
 void availableTransports(Transport* aux, Category* aux2)
 {
 	system("cls");
@@ -84,9 +130,18 @@ void availableTransports(Transport* aux, Category* aux2)
 }
 #pragma endregion
 
-#pragma region UpdateUniqueTransport
-// Updates transport via transportID
 
+#pragma region UpdateUniqueTransport
+
+/**
+ * \Function Name updateTransport
+ * \Function Type void
+ * 
+ * \Brief: Updates transport via transportID
+ * 
+ * \param original
+ * 
+ */
 void updateTransport(Transport* original) {
 	printf("---------------------------------------------------------------\n");
 	int transportID, rentedCli, status, type;
@@ -159,8 +214,20 @@ void updateTransport(Transport* original) {
 }
 #pragma endregion
 
-#pragma region UpdateTransportsOptions
 
+#pragma region UpdateTransportsOptions
+/**
+ * \Function Name updateTransportRented
+ * \Function Type int
+ * 
+ * \Brief: Updates transport status to rented or available
+ * 
+ * \param clientID
+ * \param transportID
+ * \param original
+ * \param opt
+ * 
+ */
 int updateTransportRented(int clientID,int transportID, Transport* original, int opt){
 
 	Transport* current = original;
@@ -194,7 +261,16 @@ int updateTransportRented(int clientID,int transportID, Transport* original, int
 #pragma endregion
 
 #pragma region InsertAndRemoveUniqueTransport
-// Insert unique transport
+
+/**
+ * \Function Name insertTransport
+ * \Function Type Transport *
+ * 
+ * \Brief: Insert unique transport
+ * 
+ * \param aux
+ * 
+ */
 Transport* insertTransport(Transport* aux)
 {
 	int type, status;
@@ -252,7 +328,17 @@ Transport* insertTransport(Transport* aux)
 	}
 }
 
-// Remove transport using idTransport
+
+/**
+ * \Function Name removeTransport
+ * \Function Type Transport *
+ * 
+ * \Brief: Remove transport using idTransport
+ * 
+ * \param original
+ * 
+ * \return 
+ */
 Transport* removeTransport(Transport* original)
 {
 	int idTransport;
@@ -292,8 +378,18 @@ Transport* removeTransport(Transport* original)
 }
 #pragma endregion
 
+
 #pragma region SaveTransportsFiles
-//Save transports in .bin file
+
+/**
+ * \Function Name saveTransports
+ * \Function Type void
+ * 
+ * \Brief: Save transports in .bin file
+ * 
+ * \param aux
+ * 
+ */
 void saveTransports(Transport* aux)
 {
 	char semicolon = ';';
@@ -330,7 +426,19 @@ void saveTransports(Transport* aux)
 }
 #pragma endregion
 
+
 #pragma region TransportGetFunctions
+/**
+ * \Function Name getTransportInfo
+ * \Function Type void
+ * 
+ * \Brief: Prints transport info
+ * 
+ * \param aux
+ * \param aux2
+ * \param transportID
+ * 
+ */
 void getTransportInfo(Transport* aux, Category* aux2, int transportID)
 {
 	while (aux != NULL)
@@ -353,8 +461,18 @@ void getTransportInfo(Transport* aux, Category* aux2, int transportID)
 }
 #pragma endregion
 
+
 #pragma region SortList
 
+/**
+ * \Function Name insertionSortDescendingAutonomy
+ * \Function Type Transport *
+ * 
+ * \Brief: Sorts list by descending autonomy
+ * 
+ * \param head
+ * 
+ */
 Transport* insertionSortDescendingAutonomy(Transport* head) {
 	if (head == NULL || head->next == NULL) {
 		return head;
@@ -384,6 +502,17 @@ Transport* insertionSortDescendingAutonomy(Transport* head) {
 	return sorted;
 }
 
+
+/**
+ * \Function Name checkTransportbyGeolocation
+ * \Function Type void
+ * 
+ * \Brief: Checks what transport is available in a certain geolocation
+ * 
+ * \param original
+ * \param categories
+ * 
+ */
 void checkTransportbyGeolocation(Transport* original, Category* categories) {
 
 	char geolocation[100];
@@ -410,7 +539,14 @@ void checkTransportbyGeolocation(Transport* original, Category* categories) {
 #pragma region Categories
 
 #pragma region ReadAndInsertCategoriesFromFile
-// Reads from file all transports
+
+/**
+ * \Function Name readCategories
+ * \Function Type Category *
+ * 
+ * \Brief: Reads from file all transports
+ * 
+ */
 Category* readCategories()
 {
 	FILE* fp;
@@ -432,7 +568,19 @@ Category* readCategories()
 	return(aux);
 }
 
-// Insert from file
+
+/**
+ * \Function Name insertCategories
+ * \Function Type Category *
+ * 
+ * \Brief: Insert from file
+ * 
+ * \param aux
+ * \param idCategory
+ * \param type
+ * \param desc
+ * 
+ */
 Category* insertCategories(Category* aux, int idCategory, int type, char desc[])
 {
 	Category* new = malloc(sizeof(struct newTransport));
@@ -449,7 +597,16 @@ Category* insertCategories(Category* aux, int idCategory, int type, char desc[])
 #pragma endregion
 
 #pragma region ListCategoriesOptions
-// Lists all the categories
+
+/**
+ * \Function Name listCategories
+ * \Function Type void
+ * 
+ * \Brief: Lists all the categories
+ * 
+ * \param aux
+ * 
+ */
 void listCategories(Category* aux)
 {
 	printf("---------------------------------------------------------------\n");
@@ -461,7 +618,17 @@ void listCategories(Category* aux)
 	printf("---------------------------------------------------------------\n");
 }
 
-// Get category type description
+
+/**
+ * \Function Name typeCategories
+ * \Function Type char *
+ * 
+ * \Brief: Get category type description
+ * 
+ * \param aux
+ * \param type
+ * 
+ */
 char* typeCategories(Category* aux, int type)
 {
 	while (aux != NULL)
@@ -471,7 +638,17 @@ char* typeCategories(Category* aux, int type)
 	}
 }
 
-// Get type via transportID
+
+/**
+ * \Function Name getType
+ * \Function Type int
+ * 
+ * \Brief: Get type via transportID
+ * 
+ * \param aux
+ * \param transportID
+ * 
+ */
 int getType(Transport* aux, int transportID)
 {
 	while (aux != NULL)

@@ -1,9 +1,28 @@
+/*****************************************************************//**
+ * \Filename Renting.c
+ * 
+ * 
+ * \author Ricardo Cruz && Diogo Pinto
+ * \date   March 2023
+ *********************************************************************/
 #include <stdlib.h>
 #include <string.h>
 #include "Transports.h"
 #include "Clients.h"
 
 #pragma region RentTransport
+/**
+ * \Function Name rentTransport
+ * \Function Type void
+ * 
+ * \Brief: Function to rent a transport
+ * 
+ * \param transport
+ * \param client
+ * \param category
+ * \param clientID
+ * 
+ */
 void rentTransport(Transport* transport, Client* client, Category* category, int clientID) {
 
 	int transportID;
@@ -36,7 +55,20 @@ void rentTransport(Transport* transport, Client* client, Category* category, int
 }
 #pragma endregion
 
+
 #pragma region ReturnTransport
+/**
+ * \Function Name returnTransport
+ * \Function Type void
+ * 
+ * \Brief: Returns a transport
+ * 
+ * \param transport
+ * \param client
+ * \param category
+ * \param clientID
+ * 
+ */
 void returnTransport(Transport* transport, Client* client, Category* category, int clientID) {
 
 	int transportID, opt, aux;

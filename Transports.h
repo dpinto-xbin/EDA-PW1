@@ -1,6 +1,15 @@
+/*****************************************************************//**
+ * \Filename Transports.h
+ * 
+ * 
+ * \author Ricardo Cruz && Diogo Pinto
+ * \date   March 2023
+ *********************************************************************/
 #include <stdio.h>
 #define RENTED 3
 #define AVAILABLE 4
+#define MIA 2
+#define MAINTENANCE 1
 
 #pragma region Structs
 typedef struct newTransport {

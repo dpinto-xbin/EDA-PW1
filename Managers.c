@@ -11,6 +11,13 @@
 
 
 #pragma region ReadAndInsertManagersFromFile
+/**
+ * \Function Name readManagers
+ * \Function Type Manager *
+ * 
+ * \Brief: Read from file and insert into linked list
+ * 
+ */
 Manager* readManagers()
 {
 	FILE* fp;
@@ -31,7 +38,18 @@ Manager* readManagers()
 	return(aux);
 }
 
-// Insert from file
+/**
+ * \Function Name insertManagers
+ * \Function Type Manager *
+ * 
+ * \Brief: insert from file into linked list
+ * 
+ * \param aux
+ * \param nif
+ * \param name
+ * \param password
+ * 
+ */
 Manager* insertManagers(Manager* aux, char nif[], char name[], char password[])
 {
 	Manager* new = malloc(sizeof(struct newManager));
@@ -47,8 +65,17 @@ Manager* insertManagers(Manager* aux, char nif[], char name[], char password[])
 }
 #pragma endregion
 
-#pragma region Login
 
+#pragma region Login
+/**
+ * \Function Name verifyLogin
+ * \Function Type int
+ * 
+ * \Brief: Initialize AUTH proccess
+ * 
+ * \param original
+ * 
+ */
 int verifyLogin(Manager* original) {
 
 	char nif[15], password[30];
@@ -72,6 +99,16 @@ int verifyLogin(Manager* original) {
 
 }
 
+/**
+ * \Function Name checkNIF
+ * \Function Type int
+ * 
+ * \Brief: Compares nif for AUTH proccess
+ * 
+ * \param original
+ * \param nif
+ * 
+ */
 int checkNIF(Manager* original, char nif[]) {
 	while (original != NULL) {
 		if (strcmp(original->nif, nif) == 0) {
@@ -83,14 +120,15 @@ int checkNIF(Manager* original, char nif[]) {
 }
 
 /**
- * .
+ * \Function Name checkAuth
+ * \Function Type int
  * 
- * \function name checkAuth
- * \function type int
+ * \Brief: Verifys if password and nif match
+ * 
  * \param original
  * \param nif
  * \param password
- * \return 
+ * 
  */
 int checkAuth(Manager* original, char nif[], char password[]) {
 	while (original != NULL) {

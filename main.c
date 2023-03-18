@@ -13,6 +13,7 @@
 #pragma warning(disable:4996)
 #pragma warning(disable:6031)
 
+
 int menu()
 {
 	int op;

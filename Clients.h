@@ -1,3 +1,10 @@
+/*****************************************************************//**
+ * \Filename Clients.h
+ * 
+ * 
+ * \author Ricardo Cruz && Diogo Pinto
+ * \date   March 2023
+ *********************************************************************/
 #include <stdio.h>
 
 typedef struct newClient
@@ -23,7 +30,7 @@ Client* insertClient(Client* aux);
 //Checks if idClient exists
 int existClient(Client* aux, int idClient);
 
-//Reads the file clients.txt and insert on a list
+//Reads the file Clients.txt and insert on a list
 Client* readClients();
 
 //List all the clients in the list
@@ -40,5 +47,7 @@ void updateClient(Client* original);
 
 //Updates the rented transport on client
 int updateClientRented(int clientID, int transportID, Client* client, int opt);
+
+
 
 

@@ -1,20 +1,34 @@
+/*****************************************************************//**
+ * \Filename Clients.c
+ * 
+ * 
+ * \author Ricardo Cruz && Diogo Pinto
+ * \date   March 2023
+ *********************************************************************/
 #include <stdlib.h>
 #include <string.h>
 #include "Clients.h"
 #include "Transports.h"
-
 #pragma warning(disable:4996)
 
+
 #pragma region ReadAndInsertClientsFromFile
-// Reads from file all clients
+/**
+ * \Function Name readClients
+ * \Function Type Client *
+ * 
+ * \Brief: Read clients from file
+ * 
+ * \return 
+ */
 Client* readClients()
 {
 	FILE* fp;
 	int idClient, rentedT;
 	float balance;
 	char name[50], nif[15], address[50], phone[12], email[50];
-
 	Client* aux = NULL;
+
 	fp = fopen("Clients.txt", "r");
 	if (fp != NULL)
 	{
@@ -30,7 +44,24 @@ Client* readClients()
 	return(aux);
 }
 
-// Insert new client
+
+/**
+ * \Function Name insertClients
+ * \Function Type Client *
+ * 
+ * \Brief: Insert clients from list
+ * 
+ * \param aux
+ * \param idClient
+ * \param name
+ * \param balance
+ * \param nif
+ * \param address
+ * \param phone
+ * \param email
+ * \param rentedT
+ * \return 
+ */
 Client* insertClients(Client* aux, int idClient, char name[], float balance, char nif[], char address[], char phone[], char email[], int rentedT)
 {
 	if (!existClient(aux, idClient))
@@ -55,6 +86,15 @@ Client* insertClients(Client* aux, int idClient, char name[], float balance, cha
 #pragma endregion
 
 #pragma region InsertAndRemoveUniqueClient
+/**
+ * \Function Name insertClient
+ * \Function Type Client *
+ * 
+ * \Brief: Insert new client
+ * 
+ * \param aux
+ * \return 
+ */
 Client* insertClient(Client* aux)
 {
 	int idClient, rentedT;
@@ -110,7 +150,16 @@ Client* insertClient(Client* aux)
 	}
 }
 
-// Remove client using idClient
+
+/**
+ * \Function Name removeClient
+ * \Function Type Client *
+ * 
+ * \Brief: Remove client using idClient
+ * 
+ * \param original
+ * \return 
+ */
 Client* removeClient(Client* original)
 {
 	int idClient;
@@ -151,6 +200,12 @@ Client* removeClient(Client* original)
 #pragma endregion
 
 #pragma region UpdateUniqueClient
+/**
+ * \Function Name updateClient
+ * \Function Type void
+ *  
+ * \param original
+ */
 void updateClient(Client* original) {
 	printf("---------------------------------------------------------------\n");
 	char address[50];
@@ -210,8 +265,16 @@ void updateClient(Client* original) {
 }
 #pragma endregion
 
+
 #pragma region ListClientsOptions
-// Lists all the clients
+/**
+ * \Function Name listClients
+ * \Function Type void
+ * 
+ * \Brief: Lists all the clients
+ * 
+ * \param aux
+ */
 void listClients(Client* aux)
 {
 	printf("---------------------------------------------------------------\n");
@@ -225,8 +288,17 @@ void listClients(Client* aux)
 #pragma endregion
 
 #pragma region ClientCheckFunctions
-// Checks if client is already on the list
-// Returns 1 if exists, 0 if doesnt exist
+/**
+ * \Function Name existClient
+ * \Function Type int
+ * 
+ * \Brief: Checks if client is already on the list
+ * 
+ * \param aux
+ * \param idClient
+ * 
+ * \return 1 if exists, 0 if doesnt exist
+ */
 int existClient(Client* aux, int idClient)
 {
 	while (aux != NULL)
@@ -237,8 +309,20 @@ int existClient(Client* aux, int idClient)
 	return(0);
 }
 
-// Checks if client has a rental at that time
-// returns the transportID if yes, or 0 if theres no rental
+
+/**
+ * \Function Name checkClientRental
+ * \Function Type int
+ * 
+ * \Brief: Checks if client has a rental at that time
+ * 
+ * \param original
+ * \param transport
+ * \param category
+ * \param clientID
+ * 
+ * \return the transportID if yes, or 0 if theres no rental
+ */
 int checkClientRental(Client* original, Transport* transport, Category* category, int clientID) {
 	int aux;
 	while (original != NULL)
@@ -266,6 +350,15 @@ int checkClientRental(Client* original, Transport* transport, Category* category
 #pragma endregion
 
 #pragma region SaveClientsFiles
+/**
+ * \Function Name saveClients
+ * \Function Type void
+ * 
+ * \Brief: Function to save the clients to a binary file
+ * 
+ * \param aux
+ * 
+ */
 void saveClients(Client* aux)
 {
 	char semicolon = ';';
@@ -299,6 +392,19 @@ void saveClients(Client* aux)
 #pragma endregion
 
 #pragma region UpdateClientsOptions
+/**
+ * \Function Name updateClientRented
+ * \Function Type int
+ * 
+ * \Brief: Function to update the rentedT of a client
+ * 
+ * \param clientID
+ * \param transportID
+ * \param original
+ * \param opt
+ * 
+ * \return 1 if updated, 0 if not updated
+ */
 int updateClientRented(int clientID, int transportID, Client* original, int opt) {
 
 	Client* current = original;
