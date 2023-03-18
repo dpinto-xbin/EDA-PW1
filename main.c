@@ -23,7 +23,8 @@ int menu()
 	printf("11 - List Categories\n");
 	printf("12 - Rent Transport\n");
 	printf("13 - Return Transport\n");
-	printf("14 - Clear console\n");
+	printf("14 - Transports by descending order of autonomy\n");
+	printf("15 - Clear console\n");
 	printf("0 - Exit\n");
 	printf("OPTION:\n");
 	scanf("%d", &op);
@@ -36,9 +37,11 @@ int main()
 	Client* clients = NULL; // Empty linked list
 	Transport* transports = NULL;
 	Category* categories = NULL;
+	Transport* sortedList = NULL;
 	clients = readClients(); // Start by reading file
 	transports = readTransports();
 	categories = readCategories();
+	sortedList = insertionSortDescendingAutonomy(transports);
 	int op, clientID = 1; // Case 12 - direct relation check!
 
 	do
@@ -59,7 +62,8 @@ int main()
 		case 11: listCategories(categories); break;
 		case 12: rentTransport(transports, clients, categories, clientID); break; //Dont forget this step is required to have client logged in!
 		case 13: returnTransport(transports, clients, categories, clientID); break; //Dont forget this step is required to have client logged in!
-		case 14: system("cls"); break;
+		case 14: listTransports(sortedList); break;
+		case 15: system("cls"); break;
 		}
 	} while (op != 0);
 

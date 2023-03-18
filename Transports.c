@@ -353,6 +353,41 @@ void getTransportInfo(Transport* aux, Category* aux2, int transportID)
 }
 #pragma endregion
 
+#pragma region SortList
+
+Transport* insertionSortDescendingAutonomy(Transport* head) {
+	if (head == NULL || head->next == NULL) {
+		return head;
+	}
+
+	Transport* sorted = head, * unsorted = head->next;
+	sorted->next = NULL;
+
+	while (unsorted != NULL) {
+		Transport* node = unsorted;
+		unsorted = unsorted->next;
+
+		if (node->autonomy > sorted->autonomy) {
+			node->next = sorted;
+			sorted = node;
+		}
+		else {
+			Transport* current = sorted;
+			while (current->next != NULL && current->next->autonomy > node->autonomy) {
+				current = current->next;
+			}
+			node->next = current->next;
+			current->next = node;
+		}
+	}
+
+	return sorted;
+}
+
+
+
+#pragma endregion
+
 
 #pragma endregion
 
