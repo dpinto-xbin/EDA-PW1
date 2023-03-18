@@ -384,6 +384,22 @@ Transport* insertionSortDescendingAutonomy(Transport* head) {
 	return sorted;
 }
 
+void checkTransportbyGeolocation(Transport* original, Category* categories) {
+
+	char geolocation[100];
+	printf("Please insert your geolocation:\n");
+	scanf("%99s", geolocation);
+
+	system("cls");
+	while (original != NULL) {
+		if (strcmp(original->geolocation, geolocation) == 0) {
+			printf("Transport ID: %d - Type: %s - Battery: %.2f - Autonomy: %.2f \n\n\n", original->idTransport, typeCategories(categories, original->type), original->battery, original->autonomy);
+		}
+		original = original->next;
+	}
+	return 0;
+
+}
 
 
 #pragma endregion

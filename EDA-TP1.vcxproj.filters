@@ -27,6 +27,9 @@
     <ClCompile Include="Renting.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Managers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clients.h">
@@ -38,6 +41,9 @@
     <ClInclude Include="Renting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Managers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Clients.txt">
@@ -47,6 +53,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="Categories.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Managers.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

@@ -65,9 +65,12 @@ void getTransportInfo(Transport* aux, Category* aux2, int transportID);
 // Check for type via TRANSPORTID
 int getType(Transport* aux, int transportID);
 
-
 // To sort the linked list into descending by autonomy
 Transport* insertionSortDescendingAutonomy(Transport* head);
+
+// List all the vehicles in that geolocation
+void checkTransportbyGeolocation(Transport* original, Category* categories);
+
 #pragma endregion
 
 
